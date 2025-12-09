@@ -1,0 +1,53 @@
+@use '../styles/vars' as v;
+
+.app {
+  min-height: 100vh;
+
+  &--dark {
+    background-color: #222222;
+  }
+}
+
+.header {
+  background-color: v.$color-filling;
+  padding: 1rem;
+
+  &-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+}
+
+.main {
+  padding: 1rem;
+
+  // affiche les macarons en flex
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  &__input {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+  }
+
+  &__btn {
+    border-radius: 0.5rem;
+    border: none;
+  }
+}
+
+
+.darkmode {
+  border: none;
+  border-radius: 50%;
+  padding: 0.4rem
+}
