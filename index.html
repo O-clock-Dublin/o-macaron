@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>O'Macarons</title>
+    <!-- on pourrait lier notre fichier scss ici mais il faut qu'il passe dans le build, on va plutot utiliser la syntaxe des imports pour que notre bundler le prenne en compte -->
+  </head>
+  <body>
+    <!-- le div principal, celui dans lequel on va creer nos elements react -->
+    <div id="root"></div>
+    <!-- on inclu le fichier JS point d'entrée, celui qui fait le "append" de nos elements dans le div root -->
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+// regles globales (sur le body)
+// et import des partials
+// les regles de chaque composants sont dans le fichier de style du composant concerné
+
+@use 'styles/vars' as v;
+@use 'styles/reset';
+
+body {
+  margin: 0;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}

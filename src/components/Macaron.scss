@@ -1,0 +1,54 @@
+@use '../styles/vars' as v;
+.macaron {
+
+  position: relative;
+
+  &__coque {
+    background-color: v.$color-biscuit; // ecrasé en CSS-inJS dans le JSX par le couleur du macaron
+
+    width: 150px;
+    height: 30px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    
+    position: relative;
+
+    &::after, &::before {
+      position: absolute;
+
+      content: "";
+      height: 10px;
+      width: calc(100% + 10px);
+      border-radius: 10px;
+      bottom: -10px;
+      left: -5px;
+    }
+    &.reversed { transform: rotate(180deg); }
+    &::before { background-color: inherit; }
+    &::after { background-color: rgba(0, 0, 0, 0.2); }
+  }
+
+  &__like {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 1;    
+    border: none;
+    background-color: transparent;
+  }  
+
+  &__filling {
+    background-color: v.$color-filling;
+    color: #333;
+
+    width: 150px;
+    height: 40px;
+    border-radius: 30px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+}
