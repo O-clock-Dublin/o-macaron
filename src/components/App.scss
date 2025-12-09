@@ -1,0 +1,88 @@
+@use '../styles/vars' as v;
+
+.app {
+  min-height: 100vh;
+
+  &--dark {
+    background-color: #222222;
+  }
+}
+
+.header {
+  background-color: v.$color-filling;
+  padding: 1rem;
+
+  &-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+}
+
+.main {
+  padding: 1rem;
+
+  // affiche les macarons en flex
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  &__input {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+  }
+
+  &__btn {
+    border-radius: 0.5rem;
+    border: none;
+  }
+}
+
+
+.darkmode {
+  border: none;
+  border-radius: 50%;
+  padding: 0.4rem
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: #FF3D00;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+
+  &-link {
+    text-decoration: none;
+    color: #F0F;
+  }
+
+  // la classe pour souligner c'est pas "active" mais "nav-link--active"
+  &--active {
+    text-decoration: underline;
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
