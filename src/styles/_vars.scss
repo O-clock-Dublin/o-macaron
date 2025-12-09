@@ -1,0 +1,6 @@
+@use 'sass:color';
+
+$color-biscuit: #bd8941;
+
+// le filling est 50% plus clair que le biscuit, on créé la couleur avec sass:color
+$color-filling: color.scale($color-biscuit, $lightness: 50%);
