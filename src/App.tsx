@@ -16,24 +16,30 @@ function App() {
       id: 1,
       name: "Shenron",
       licence: "Dragon Ball",
+      popularity: 5,
     },
     {
       id: 2,
       name: "Krokmou",
       licence: "Dragons",
+      popularity: 5,
     },
     {
       id: 3,
       name: "Smolder",
       licence: "LoL",
+      popularity: 5,
     },
   ]
 
   // Je crée un state qui va manager mon tableau
-  // J'en ai besoin parce que un form permet d'ajouter des biscuits
+  // J'en ai besoin parce que un form permet d'ajouter des dragons
   const [dragons, setDragons] = useState<DragonI[]>(dragonlist)
-  //Je crée un state pour choisir mon macaron
+  //Je crée un state pour choisir mon dragon
   const [currentDragon, setCurrentDragon] = useState(dragons[0])
+
+  //Je crée un state pour gérer la cote de popularité du dragon
+  const [popularity, setPopularity] = useState(3)
 
   const handleAction = (formData: FormData) => {
     //Je recupère les clés du form qui m'interressent
@@ -48,6 +54,7 @@ function App() {
       id: duplicatedDragons.length + 1,
       name: name as string,
       licence: licence as string,
+      popularity: popularity,
     })
     //Je peux créer ma duplication de tableau ET le mettre à jour en même temps
     //Grace au spread operator
@@ -96,6 +103,16 @@ function App() {
           <input type="text" name="name" id="name" />
           <label htmlFor="licence">licence</label>
           <input type="text" name="licence" id="licence" />
+          <label htmlFor="popularity">Popularité : de 1 à 5</label>
+          <input
+            min="1"
+            max="5"
+            name="popularity"
+            id="popularity"
+            type="range"
+            value={popularity}
+            onChange={(event) => setPopularity(Number(event.target.value))}
+          />
           <button type="submit">Envoyer</button>
         </form>
       </main>
