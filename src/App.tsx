@@ -2,8 +2,8 @@
 import Header from "./component/Header"
 import Footer from "./component/Footer"
 import Dragon from "./component/Dragon"
-import Macaron from "./component/Macaron"
-import { MacaronI } from "./type/MacaronI"
+import DragonCard from "./component/DragonCard"
+import { DragonI } from "./type/DragonI"
 import { useState } from "react"
 
 // COMPOSANT : un composant est une fonction qui return du JSX
@@ -11,23 +11,62 @@ import { useState } from "react"
 function App() {
   // ici on peut definir des variables (bidons: qui ne sont pas réactives)
   // on a un tableau de string et on veut fabriquer un tableau de div pour notre JSX on va utiliser MAP
-  const macaronList: MacaronI[] = [
+  const dragonlist: DragonI[] = [
     {
-      perfume: "Choco",
-      color: "Marron",
+      id: 1,
+      name: "Shenron",
+      licence: "Dragon Ball",
     },
     {
-      perfume: "Framboise",
-      color: "rose",
+      id: 2,
+      name: "Krokmou",
+      licence: "Dragons",
     },
     {
-      perfume: "Pistache",
-      color: "Vert",
+      id: 3,
+      name: "Smolder",
+      licence: "LoL",
     },
   ]
 
+  // Je crée un state qui va manager mon tableau
+  // J'en ai besoin parce que un form permet d'ajouter des biscuits
+  const [dragons, setDragons] = useState<DragonI[]>(dragonlist)
   //Je crée un state pour choisir mon macaron
-  const [currentMacaron, setCurrentMacaron] = useState(macaronList[0])
+  const [currentDragon, setCurrentDragon] = useState(dragons[0])
+
+  const handleAction = (formData: FormData) => {
+    //Je recupère les clés du form qui m'interressent
+    const name = formData.get("name")
+    const licence = formData.get("licence")
+    // Je duplique mon tableau qui est dans un state
+    //Ce qui crée une nouvelle adresse pour mon tableau
+    // IMPORTANT on,, ne modifie JAMAIS un state sans passer par son setter
+    const duplicatedDragons = [...dragons]
+    //J'ajoute la nouvelle entrée demandée par l'administrateur
+    duplicatedDragons.push({
+      name: name as string,
+      licence: licence as string,
+    })
+    //Je peux créer ma duplication de tableau ET le mettre à jour en même temps
+    //Grace au spread operator
+    // const duplicatedMacarons = [
+    //   ...macarons,
+    //   {
+    //     perfume: perfume as string,
+    //     color: color as string,
+    //   },
+    // ]
+    //Je set mon state pour update le tableau
+    setDragons(duplicatedDragons)
+  }
+
+  // Les types non primitifs ne peuvenbt pas être comparés comme les types primitifs,
+  //  à moins qu'ils partagent la même "adresse"
+  const array = ["pomme", "poire", "peche"]
+  const array2 = array
+  //return true
+  console.log(array === array2)
 
   return (
     <div className="app">
@@ -36,14 +75,11 @@ function App() {
       <main className="main">
         {
           // avec map on fabrique un tableau d'element div JSX
-          macaronList.map((macaron) => {
+          dragons.map((dragon) => {
             // on doit return la ligne du tableau généré par map: un element JSX div
             // on est obligé d'ajouter une prop "key" aux elements quand ils sont dan sun tableau pour que React puisse les identifier (attention on ne met pas l'index du tableau en key)
             return (
-              <Macaron
-                macaron={macaron}
-                setCurrentMacaron={setCurrentMacaron}
-              />
+              <DragonCard dragon={dragon} setCurrentDragon={setCurrentDragon} />
             )
           })
         }
@@ -51,9 +87,16 @@ function App() {
           {/* // 🟢 Vu que le state est global, je peux utiliser des infos à
           différents endroits de mon application Votre choix :{" "} */}
           <span id="choice">
-            Votre choix actuel : macaron {currentMacaron.perfume}
+            Votre choix actuel : Dragon {currentDragon.name}
           </span>
         </p>
+        <form action={handleAction}>
+          <label htmlFor="name">name</label>
+          <input type="text" name="name" id="name" />
+          <label htmlFor="licence">licence</label>
+          <input type="text" name="licence" id="licence" />
+          <button type="submit">Envoyer</button>
+        </form>
       </main>
       {/* <ComposantImporté props1DuComposantImporté = {propsQueJeTransmet} /> */}
       <Footer />
