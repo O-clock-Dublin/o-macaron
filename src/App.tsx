@@ -45,6 +45,7 @@ function App() {
     const duplicatedDragons = [...dragons]
     //J'ajoute la nouvelle entrée demandée par l'administrateur
     duplicatedDragons.push({
+      id: duplicatedDragons.length + 1,
       name: name as string,
       licence: licence as string,
     })
