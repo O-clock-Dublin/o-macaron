@@ -4,7 +4,7 @@ import Footer from "./component/Footer"
 import Dragon from "./component/Dragon"
 import DragonCard from "./component/DragonCard"
 import { DragonI } from "./type/DragonI"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 // COMPOSANT : un composant est une fonction qui return du JSX
 // on met une majuscule au debut du nom de la fonction composant
@@ -31,6 +31,28 @@ function App() {
       popularity: 5,
     },
   ]
+
+  // STEPS POUR CONSOMMER UNE API
+
+  // 1. Je crée le state qui me permet de manager mes données (un tableau en général ou un objet)
+  //2. Je crée le UseEffect afin d'appeler l'api
+  //3. au sein du useEffect je transforme ma promesse en json
+  //4. Je set mon state avec les données fraichement aquises
+  //5 je map sur mon tableau pour afficher mes données
+
+  //Je crée un state pour accueillir et manager mes datas api
+  const [datas, setDatas] = useState([])
+
+  // Je souhaite consomer mon API
+  // UseEffect me permet d'effectuer des tâches APRES le rendu définitif de mon application
+  useEffect(async () => {
+    const httpResponse = await fetch(
+      "https://oclock-api.vercel.app/api/macarons"
+    )
+    const dataArray = await httpResponse.json()
+    console.log(dataArray)
+    return setDatas(dataArray)
+  }, [])
 
   // Je crée un state qui va manager mon tableau
   // J'en ai besoin parce que un form permet d'ajouter des dragons
@@ -76,6 +98,29 @@ function App() {
   //return true
   console.log(array === array2)
 
+  // Le useEffect intervient pour effectuer des actions
+  // APRES que le vdom ai modifié le dom réel
+  // Ainsi toutes les manipoulations dom sont accessibles
+  // Sert pour appel api / mise en place de timer / interaction avec services externes (mails...)
+  useEffect(
+    () => {
+      console.log("hello mate")
+      // Le dom etant chargé je peux aller target ma class main et changer son style
+      document.querySelector("main").style.backgroundColor = "blue"
+    },
+    //le deuxieme parametre est un tableau de dépendance (dependency array)
+    // Il est vide : Le useEffect ne sera appelé qu'une seule fois après le premier rendu
+    // des dépendances sont à l'interieur : Le useEffect sera lancé à CHAQUE FOIS qu'une des dépendance est modifiée
+    // il n'existe pas : le useEffect est appelé après chaque rendu du composant
+    []
+  )
+
+  //J'essaye de modifier le background color de mon main
+  // Impossible en l'état, car le vdom n'est pas chargé tout de suite au lancement de l'application
+  // Il faut donc attendre que le VDOM soit chargé, afin d'appliquer le style
+  // On deplace donc cette ligne dans le hook useEffect
+  //document.querySelector("main").style.backgroundColor = "blue"
+
   return (
     <div className="app">
       <Header />
@@ -115,6 +160,10 @@ function App() {
           />
           <button type="submit">Envoyer</button>
         </form>
+        <div>
+          {datas.length > 0 &&
+            datas.map((data) => <div key={data.id}>{data.flavour}</div>)}
+        </div>
       </main>
       {/* <ComposantImporté props1DuComposantImporté = {propsQueJeTransmet} /> */}
       <Footer />
