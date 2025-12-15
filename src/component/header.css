@@ -1,0 +1,8 @@
+.header {
+  .menu-link {
+    color: yellowgreen;
+  }
+  .menu-link.active {
+    color: rgb(67, 67, 228);
+  }
+}
