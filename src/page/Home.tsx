@@ -5,26 +5,26 @@ import { useEffect, useState } from "react"
 export default function Home() {
   // ici on peut definir des variables (bidons: qui ne sont pas réactives)
   // on a un tableau de string et on veut fabriquer un tableau de div pour notre JSX on va utiliser MAP
-  const dragonlist: DragonI[] = [
-    {
-      id: 1,
-      name: "Shenron",
-      licence: "Dragon Ball",
-      popularity: 5,
-    },
-    {
-      id: 2,
-      name: "Krokmou",
-      licence: "Dragons",
-      popularity: 5,
-    },
-    {
-      id: 3,
-      name: "Smolder",
-      licence: "LoL",
-      popularity: 5,
-    },
-  ]
+  // const dragonlist: DragonI[] = [
+  //   {
+  //     id: 1,
+  //     name: "Shenron",
+  //     licence: "Dragon Ball",
+  //     popularity: 5,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Krokmou",
+  //     licence: "Dragons",
+  //     popularity: 5,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Smolder",
+  //     licence: "LoL",
+  //     popularity: 5,
+  //   },
+  // ]
 
   // STEPS POUR CONSOMMER UNE API
 
@@ -35,7 +35,7 @@ export default function Home() {
   //5 je map sur mon tableau pour afficher mes données
 
   //Je crée un state pour accueillir et manager mes datas api
-  const [datas, setDatas] = useState([])
+  const [datas, setDatas] = useState<DragonI[]>([])
 
   // Je souhaite consomer mon API
   // UseEffect me permet d'effectuer des tâches APRES le rendu définitif de mon application
@@ -50,7 +50,7 @@ export default function Home() {
 
   // Je crée un state qui va manager mon tableau
   // J'en ai besoin parce que un form permet d'ajouter des dragons
-  const [dragons, setDragons] = useState<DragonI[]>(dragonlist)
+  const [dragons, setDragons] = useState<DragonI[]>([])
   //Je crée un state pour choisir mon dragon
   const [currentDragon, setCurrentDragon] = useState(dragons[0])
 
@@ -69,6 +69,8 @@ export default function Home() {
     duplicatedDragons.push({
       id: duplicatedDragons.length + 1,
       name: name as string,
+      imgUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYPDHx1XjxObHtt2GSqqGhoybTTiOUkVaRlg&s",
       licence: licence as string,
       popularity: popularity,
     })

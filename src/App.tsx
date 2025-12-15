@@ -9,7 +9,6 @@ import DragonDetail from "./page/DragonDetail"
 
 // COMPOSANT : un composant est une fonction qui return du JSX
 // on met une majuscule au debut du nom de la fonction composant
-
 //Avec React routeur : Mon app n'est plus une page, mais le point d'entrée de mon application
 // C'est le layout : le squelette du site qui sera présent sur toutes les pages
 function App() {
